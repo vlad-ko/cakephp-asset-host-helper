@@ -107,7 +107,7 @@ class CfHelper extends AppHelper {
  * Works for arrays of assets (like with JS or CSS) or single files
  */  
   private function setAssetPath($assets = NULL) {
-    if($assets && Configure::read() == 0) {
+    if($assets && Configure::read('debug') == 0) {
       if(is_array($assets)) {
         for($i = 0; $i < count($assets); $i++) {
           $assets[$i] = $this->pathPrep() . $assets[$i] . $this->getAssetTimestamp(); 
