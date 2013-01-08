@@ -72,7 +72,8 @@ class CfHelper extends AppHelper {
  * Are we forcing the timestamp (based on core.php setting)?
  * (We really, really should)
  */   
-  public function beforeRender() {
+  public function beforeRender($viewFile) {
+    parent::beforeRender($viewFile);
     if ((Configure::read('Asset.timestamp') == true && Configure::read() > 0) || Configure::read('Asset.timestamp') === 'force') {
       $this->forceTimestamp = TRUE;
     }
@@ -107,7 +108,7 @@ class CfHelper extends AppHelper {
  * Works for arrays of assets (like with JS or CSS) or single files
  */  
   private function setAssetPath($assets = NULL) {
-    if($assets && Configure::read() == 0) {
+    if($assets && Configure::read('debug') == 0) {
       if(is_array($assets)) {
         for($i = 0; $i < count($assets); $i++) {
           $assets[$i] = $this->pathPrep() . $assets[$i] . $this->getAssetTimestamp(); 
